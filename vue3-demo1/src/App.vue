@@ -2,7 +2,7 @@
  * @Author: suziping123 3268845120@qq.com
  * @Date: 2025-11-11 13:49:45
  * @LastEditors: suziping123 3268845120@qq.com
- * @LastEditTime: 2025-11-13 20:44:14
+ * @LastEditTime: 2025-11-18 15:26:08
  * @FilePath: \vue-demo1\vue3-demo1\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -28,7 +28,14 @@ import HelloWorld from './components/HelloWorld.vue'
   <RouterView />
 </template>
 
+
 <style scoped>
+#app {
+  width: 100%;
+  margin: 0; /* 无边距 */
+  padding: 0; /* 无填充 */
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;

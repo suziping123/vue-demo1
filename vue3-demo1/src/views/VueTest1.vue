@@ -35,12 +35,7 @@
     <table>
         <thead>
             <tr>
-                <th>序号</th>
-                <th>姓名</th>
-                <th>性别</th>
-                <th>年龄</th>
-                <th>爱好</th>
-                <th>操作</th>
+                <th v-for="(val,index) of titles" :key="index">{{ val }}</th>
             </tr>
         </thead>
         <tr v-for="(item,index) in filteredList" :key="index">
@@ -51,7 +46,7 @@
             </td>
             <td >
                 <span v-show="!item.isEditing">{{ item.sex }}</span>
-                <select v-show="item.isEditing" v-model="item.editSex" class="edit-input">
+                <select v-show="item.isEditing" v-model="item.editSex" class="edit-input,wideth:auto,height:auto">
                     <option value="男">男</option>
                     <option value="女">女</option>
                 </select>
@@ -86,6 +81,7 @@
         data() {
             return {
                 count: 0,
+                titles: ['序号', '姓名', '性别', '年龄', '爱好','操作'],
                 PersonList:[
                     {"name":"张三","sex":"男","age":18,"hobby":"看电影"},
                     {"name":"李四","sex":"女","age":11,"hobby":"看小说"},
@@ -204,9 +200,9 @@ button{
 }
 td{
    text-align: center; 
+   color: #000;
 }
 thead{
-    
     background: linear-gradient(to Right,#a8ef9b,#a5e117);
 }
 table{
@@ -252,7 +248,7 @@ select {
     padding-left: 10px;
 }
 .edit-input {
-    width: 80%;
+    width: 90%;
     padding: 4px 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
