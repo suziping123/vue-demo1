@@ -7,80 +7,82 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div class="container">
-    <h1>🛒 购物车应用</h1>
-  
-    <div class="addGoods">
-      <h2 class="font-size:20px">添加商品</h2>
-      <hr style="background: linear-gradient(to right, transparent,  black 50%, transparent);">
-      <form class="add" @submit.prevent="addGoods">
-          <label for="goodsname">商品名称</label>
-          <input type="text" id="goodsname" v-model="itemName" placeholder="请输入商品名称">
-          <label for="goodsprice">商品价格</label>
-          <input type="number" id="goodsprice" v-model.number="itemPrice" placeholder="请输入商品价格" min="0" step="0.01">
-          <label for="goodsnum">商品数量</label>
-          <input type="number" id="goodsnum" v-model.number="itemNum" placeholder="请输入商品数量" value="1" mian="1">
-          <br/>
-          <button type="submit" class="myadd">添加到购物车</button>
-      </form>
-    </div>
+    <div class="container">
+        <h1>🛒 购物车应用</h1>
     
-    <!-- 统计 -->
-    <div class="statis">
-        <div class="stat">
-            <div>商品种类</div>
-            <div class="stat-value">{{ cartItems.length }}</div>
+        <div class="addGoods">
+        <h2 class="font-size:20px">添加商品</h2>
+        <hr style="">
+        <form class="add" @submit.prevent="addGoods">
+            <label for="goodsname">商品名称</label>
+            <input type="text" id="goodsname" v-model="itemName" placeholder="请输入商品名称">
+            <label for="goodsprice">单价</label>
+            <input type="number" id="goodsprice" v-model.number="itemPrice" placeholder="请输入单价" min="0" step="0.01">
+            <label for="goodsnum">商品数量</label>
+            <input type="number" id="goodsnum" v-model.number="itemNum" placeholder="请输入商品数量" value="1" mian="1">
+            <br/>
+            <button type="submit" class="myadd">添加到购物车</button>
+        </form>
         </div>
-        <div class="stat">
-            <div>商品总数</div>
-            <div class="stat-value">{{ getTotalNum() }}</div>
+        
+        <!-- 统计 -->
+        <div class="statis">
+            <div class="stat">
+                <div>商品种类</div>
+                <div class="stat-value">{{ cartItems.length }}</div>
+            </div>
+            <div class="stat">
+                <div>商品总数</div>
+                <div class="stat-value">{{ getTotalNum() }}</div>
+            </div>
+            <div class="stat">
+                <div>总金额</div>
+                <div class="stat-value">{{ getTotalPrice() }}￥</div>
+            </div>
         </div>
-        <div class="stat">
-            <div>总金额</div>
-            <div class="stat-value">{{ getTotalPrice() }}￥</div>
+        
+        <!-- 购物车列表 -->
+        <div class="cartList">
+            <h1 class="cart">购物车</h1>
+            <hr style="width: 338px;">
+            <table v-if="cartItems.length">
+                <thead>
+                    <tr>
+                        <th>商品名称</th>
+                        <th>单价</th>
+                        <th>商品数量</th>
+                        <th>小计</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in cartItems" :key="index">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>
+                            <button @click="item.num--">-</button>
+                            {{ item.num }}
+                            <button @click="item.num++">+</button>
+                        </td>
+                        <td>{{ item.price * item.num }}</td>
+                        <td>
+                            <button @click="cartItems.splice(index,1)">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div v-else>购物车为空，快去添加商品吧！
+                
+            </div>
+            <div class="tfoot">
+                <div>商品总价{{ getTotalPrice() }}</div>
+                <div>总计：{{ getTotalPrice() }}¥</div>
+                <button class="setting" @click="clearCart">清空购物车</button>
+                <button class="setting" @click="continueShopping">继续购物</button>
+                <button class="setting" @click="placeOrder">下单</button>
+            </div>
         </div>
     </div>
-    
-    <!-- 购物车列表 -->
-    <div class="cartList">
-        <h1 class="cart">购物车</h1>
-        <table v-if="cartItems.length">
-            <thead>
-                <tr>
-                    <th>商品名称</th>
-                    <th>商品价格</th>
-                    <th>商品数量</th>
-                    <th>小计</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(item,index) in cartItems" :key="index">
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.price }}</td>
-                    <td>
-                        <button @click="item.num--">-</button>
-                        {{ item.num }}
-                        <button @click="item.num++">+</button>
-                    </td>
-                    <td>{{ item.price * item.num }}</td>
-                    <td>
-                        <button @click="cartItems.splice(index,1)">删除</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div v-else>购物车为空</div>
-        <div class="tfoot">
-            <div>商品总价{{ getTotalPrice() }}</div>
-            <div>总计：{{ getTotalPrice() }}¥</div>
-            <button class="setting" @click="clearCart">清空购物车</button>
-            <button class="setting" @click="continueShopping">继续购物</button>
-            <button class="setting" @click="placeOrder">下单</button>
-        </div>
-    </div>
-</div>
-  
 </template>
 
 <script setup lang="ts">
@@ -104,7 +106,7 @@ function addGoods(){
     }
     const price = parseFloat(itemPrice.value.toFixed(2))
     if (isNaN(price) || price <= 0) {
-        alert('请输入有效的商品价格（必须大于0）！')
+        alert('请输入有效的单价（必须大于0）！')
         return
     }
     // 验证数量
@@ -157,17 +159,19 @@ function placeOrder() {
 <style scoped>
 /* 这里写样式 */
 table{
+    margin-top: 20px;
     text-align: center;
     border-collapse: collapse;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 th{
+    background: rgb(79, 158, 223,50%);
     padding: 2px;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
 }
 td{
     padding: 2px;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
 }
 h1{
     color: rgb(12, 129, 123);
