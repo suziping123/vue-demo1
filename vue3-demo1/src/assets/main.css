@@ -24,12 +24,16 @@ a,
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
+    justify-content: center;  /* 只水平居中 */
+    align-items: flex-start;  /* 顶部对齐，不是垂直居中 */
+    padding-top: 20px;        /* 顶部留白 */ 
   }
 
   #app {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    max-width: 1200px;        /* 合理的最大宽度 */
+    width: 100%;              /* 宽度100% */
+    padding: 0 2rem;          /* 保持内边距 */
+    margin: 0 auto;           /* 水平居中 */
   }
 }
