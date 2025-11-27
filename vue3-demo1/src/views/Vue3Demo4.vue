@@ -63,6 +63,15 @@
             console.log(`出生日期变为 ${oldVal}，已更新年龄为：${age.age}`);
         }
     })
+    // watch可以不止监听一个变量，也可以监听多个变量
+    watch(()=>[age.age, age.birth], (newVal, oldVal) => {
+        console.log('年龄和出生日期都变化了', newVal, oldVal)
+    })
+    // watch可以深度监听{deep: true}，意思是监听对象内部属性的变化，但是
+    watch(()=>age, (newVal, oldVal) => {
+        console.log('年龄和出生日期都变化了', newVal, oldVal)
+    }, {deep: true})
+
     function changeBirth(age: number) {
         const today = new Date()
         const birth = today.getFullYear() - age

@@ -5,7 +5,7 @@
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
-  
+
 }
 
 a,
@@ -27,7 +27,7 @@ a,
     display: flex;
     justify-content: center;  /* 只水平居中 */
     align-items: flex-start;  /* 顶部对齐，不是垂直居中 */
-    padding-top: 20px;        /* 顶部留白 */ 
+    padding-top: 20px;        /* 顶部留白 */
   }
 
   #app {
@@ -37,4 +37,15 @@ a,
     padding: 0 2rem;          /* 保持内边距 */
     margin: 0 auto;           /* 水平居中 */
   }
+}
+
+.container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*  justify-content是CSS中用来控制弹性盒子（flexbox）内元素在主轴上如何分布的属性*/
+  /*  常见的取值有：flex-start（靠前对齐）、center（居中对齐）、space-between（两端对齐）等*/
+  align-items: center;
+  background: linear-gradient(to right, #f6d365 0%, #fda085 100%);
 }
